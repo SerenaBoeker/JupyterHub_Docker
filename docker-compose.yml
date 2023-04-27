@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  jupyterhub:
+    build: ./jupyterhub       # build the container from this folder
+    image: jupyterhub_img         # name of the produced image when you build the service
+    user: root
+    ports:                    # dest:src port forwarding
+      - "8000:8000"
+    container_name: jupyterhub-container  # the service will use this container name
+    volumes:                  # give accesss to docker socket
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jupyterhub_data:/srv/jupyterhub   # persist the hub data
+    environment:              # env variables passed to the Hub process
+      DOCKER_JUPYTER_CONTAINER: jupyter-notebook
+
+      # name of the docker image for single-user servers, must match the image
+      # configured in jupyterlab section of this file
+      DOCKER_JUPYTER_IMAGE: cschranz/gpu-jupyter:v1.5_cuda-11.6_ubuntu-20.04_python-only
+
+      # name of the docker network used by the services
+      DOCKER_NETWORK_NAME: ${COMPOSE_PROJECT_NAME}_default
+
+      # IP address (alias) for the service within the docker network
+      HUB_IP: jupyterhub
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: -1
+            capabilities: [gpu]
+  
+  jupyterlab:
+    build: jupyterlab
+    image: jupyterlab_img
+    command: nvidia-smi   # or echo
+    # use this if no dockerfile for jupyterlab
+    # image: cschranz/gpu-jupyter:v1.5_cuda-11.6_ubuntu-20.04_python-only
+    # # command line for the service to terminate immediately when Docker Compose
+    # # starts it, because this image is meant to be loaded by the Hub, not by Compose
+    # command: nvidia-smi
+    user: root
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: -1
+            capabilities: [gpu]
+
+volumes:
+  jupyterhub_data:
