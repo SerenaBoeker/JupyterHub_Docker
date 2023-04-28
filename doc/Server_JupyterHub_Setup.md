@@ -35,17 +35,11 @@ And reboot:
 sudo reboot
 ```
 
----
-
 ### Install NVIDIA CUDA Toolkit
 Install the NVIDIA CUDA Toolkit following the provided instruction from NVIDIA [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/).
 
----
-
 ### Install Docker Engine
 Install the Docker Engine following the steps provided [here](https://docs.docker.com/engine/install/ubuntu/).
-
----
 
 ### Install NVIDIA Container Toolkit
 Finally, in order for the docker containers to be able to access the GPU(s), the NVIDIA Container Toolkit needs to be installed. Follow the steps provided [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) to do so.
