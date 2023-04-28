@@ -3,7 +3,8 @@ This doc is a WIP.
 Table of contents:
 - [Introduction](#introduction)
 - [Using JupyterLab](#using-jupyterlab)
-  - [](#)
+  - [Setting up new virtual environment and installing it as jupyter kernel](#setting-up-new-virtual-environment-and-installing-it-as-jupyter-kernel)
+- [JupyterHub installation](#jupyterhub-installation)
 
 
 
@@ -14,7 +15,7 @@ The user JupyterLab environments are based on the python-only image of [GPU-Jupy
 
 <details>
     <summary>Available packages (click me!)</summary>
-    
+
     absl-py==1.4.0
     aiofiles==22.1.0
     aiosqlite==0.18.0
@@ -270,6 +271,47 @@ The user JupyterLab environments are based on the python-only image of [GPU-Jupy
 
 
 # Using JupyterLab
-To access the Lab go to https://192.168.0.177:8000 and log in using your username and password (same username and password as for your user account on the server). You will be redirected to your workspace. The two folders "data" and "shared" are available to all users, "data" is read-only, used to make files available to all users, whereas users can use the "shared" folder to share files with each other.
+To access the Lab go to https://192.168.0.177:8000 and log in using your username and password (same username and password as for your user account on the server). You will be redirected to your workspace. The two folders `data` and `shared` are available to all users, `data` is read-only, used to make files available to all users, whereas users can use the `shared` folder to share files with each other.
 
-## 
+## Setting up new virtual environment and installing it as jupyter kernel
+To set up a new virtual environment, you can use the terminal of JupyterLab to install `virtualenv`, create a new environment and activate it:
+```
+pip install virtualenv
+virtualenv <env-name>
+source <env-name>/bin/activate
+```
+To use the newly created virtual environment as a jupyter kernel, perform following steps:
+```
+pip install jupyter
+ipython kernel install --name "<kernelname>" --user
+```
+You should be able to pick the kernel now in the jupyterlab launcher tab (it may take a bit to update).  
+Install all needed packages in the new virtual environment using `pip`. 
+
+To list all installed kernels:
+```
+jupyter kernelspec list
+```
+To remove a kernel:
+```
+jupyter kernelspec uninstall <kernelname>
+```
+
+<details>
+    <summary>Example (<a href="[url](https://github.com/ultralytics/yolov5)">YOLOv5</a>)</summary>
+    In terminal:
+
+    pip install virtualenv
+    virtualenv yolov5env
+    source yolov5env/bin/activate
+    git clone https://github.com/ultralytics/yolov5
+    cd yolov5
+    pip install -r requirements.txt
+    pip install jupyter
+    ipython kernel install --name "YOLOv5" --user
+
+Use the provided Jupyter Notebook `/shared/yolov5_test.ipynb` to test the installation.
+</details>
+
+# JupyterHub installation
+To set up the server and get JupyterHub up and running see [this](doc/Server_JupyterHub_Setup.md).
