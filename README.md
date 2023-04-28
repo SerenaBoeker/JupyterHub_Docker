@@ -14,6 +14,7 @@ The user JupyterLab environments are based on the python-only image of [GPU-Jupy
 
 <details>
     <summary>Available packages (click me!)</summary>
+    
     absl-py==1.4.0
     aiofiles==22.1.0
     aiosqlite==0.18.0
