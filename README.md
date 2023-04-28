@@ -1,10 +1,8 @@
-This doc is a WIP.
-
 Table of contents:
 - [Introduction](#introduction)
 - [Using JupyterLab](#using-jupyterlab)
   - [Setting up new virtual environment and installing it as jupyter kernel](#setting-up-new-virtual-environment-and-installing-it-as-jupyter-kernel)
-- [JupyterHub installation](#jupyterhub-installation)
+- [JupyterHub Setup](#jupyterhub-setup)
 
 
 
@@ -313,5 +311,5 @@ jupyter kernelspec uninstall <kernelname>
 Use the provided Jupyter Notebook `/shared/yolov5_test.ipynb` to test the installation.
 </details>
 
-# JupyterHub installation
+# JupyterHub Setup
 To set up the server and get JupyterHub up and running see [this](doc/Server_JupyterHub_Setup.md).
