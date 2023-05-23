@@ -72,6 +72,28 @@ sudo docker compose up
 JupyterHub will then be available in browser at the provided server address, port `:8000`.
 
 ---
+## Start JupyterHub on System Startup
+The bash script `StartJupyterhub.sh` will be run automatically on startup and will start the JupyterHub. If needed, edit this script to the path of the `JupyterHub_Docker` folder. In the `JupyterHub_Docker` directory, we first need to grand it permissions to make it executable:
+```
+sudo chmod a+x StartJupyterhub.sh
+```
+Then, we need to create a Systemd service, which will start this script on startup. Copy the `Jupyterhub.service` file to `/etc/systemd/system`:
+```
+sudo cp /home/ncsadmin/JupyterHub_Docker/Jupyterhub.service /etc/systemd/system/
+```
+and also set the permissions of the file with:
+```
+sudo chmod 644 /etc/systemd/system/Jupyterhub.service
+```
+Lastly, enable the service:
+```
+systemctl enable Jupyterhub.service
+```
+Check that everything is working as intended by rebooting. Use:
+```
+systemctl status Jupyterhub.service
+```
+
 
 ## Maintenance
 ### To Update the JupyterHub Config

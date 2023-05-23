@@ -1,0 +1,8 @@
+[Unit]
+Description=Jupyterhub Startup Script
+
+[Service]
+ExecStart=/home/ncsadmin/JupyterHub_Docker/StartJupyterhub.sh
+
+[Install]
+WantedBy=default.target
