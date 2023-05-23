@@ -90,7 +90,7 @@ Then start JupyterHub again using ``` sudo docker compose up ```.
 
 Instead of the above steps, it may work updating the `jupyterhub_config.py` file by using the command:
 ```
-docker-compose up --build
+docker compose up --build
 ```
 (this yet needs to be tested)
 
