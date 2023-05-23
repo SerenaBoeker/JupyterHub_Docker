@@ -97,7 +97,7 @@ systemctl status Jupyterhub.service
 
 ## Maintenance
 ### To Update the JupyterHub Config
-In order for any subsequent changes to the `jupyterhub_config.py` file to take place, it is needed to (in this order):
+In order for any subsequent changes to the `jupyterhub_config.py` file to take place, it is (probably - see note below) needed to (in this order):
 
 | Steps | Commands |
 | --- | --- |
@@ -107,6 +107,14 @@ In order for any subsequent changes to the `jupyterhub_config.py` file to take p
 | delete the docker builder cache | ``` sudo docker builder prune ``` |  
 
 Then start JupyterHub again using ``` sudo docker compose up ```.
+
+**NOTE** 
+
+Instead of the above steps, it may work updating the `jupyterhub_config.py` file by using the command:
+```
+docker compose up --build
+```
+(this yet needs to be tested)
 
 ### To Modify the JupyterLab Image of the user environment
 The user JupyterLab environments are based on the python-only image of [GPU-Jupyter](https://github.com/iot-salzburg/gpu-jupyter). Check this GitHub site if you want to modify the image. It should also be possible to install additional packages on top of this image by modifying the dockerfile in `JupyterHub_Docker/juypterlab`. Consult the [Docker documentation for best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) for doing so.
